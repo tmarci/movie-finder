@@ -1,0 +1,53 @@
+﻿<UserControl
+    x:Class="MovieFinder.UserControls.MovieBrowser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MovieFinder.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:converters="using:MovieFinder.Converters"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ComboBox Header="Colors" PlaceholderText="Pick a color" Width="200">
+            <x:String>Blue</x:String>
+            <x:String>Green</x:String>
+            <x:String>Red</x:String>
+            <x:String>Yellow</x:String>
+        </ComboBox>
+
+        <GridView x:Name="MoviesGridView"
+                  Grid.Row="1"
+                  Padding="18"
+                  ItemsSource="{Binding MovieHeaders}"
+                  DataFetchSize="1"
+                  IncrementalLoadingTrigger="Edge"
+                  IncrementalLoadingThreshold="1"
+                  HorizontalAlignment="Center"
+                  IsItemClickEnabled="True">
+
+            <GridView.Resources>
+                <converters:PosterPathConverter x:Key="PosterPathConverter"></converters:PosterPathConverter>
+            </GridView.Resources>
+
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="240" Height="360">
+                        <Image Source="{Binding PosterPath, Converter={StaticResource PosterPathConverter}}"
+                               Stretch="UniformToFill"
+                               VerticalAlignment="Center" />
+                        <Border VerticalAlignment="Bottom" Background="#AA000000">
+                            <TextBlock Text="{Binding Title}" Margin="12" Foreground="White"/>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</UserControl>

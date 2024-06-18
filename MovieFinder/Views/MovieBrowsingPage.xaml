@@ -1,0 +1,32 @@
+﻿<Page x:Class="MovieFinder.Views.MovieBrowsingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:MovieFinder.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="using:MovieFinder.ViewModels" xmlns:local1="using:MovieFinder.Converters" xmlns:controls1="using:MovieFinder.UserControls" mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:MovieBrowserViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <controls:PageHeader Text="Movie Finder" DefaultLabelPosition="Right" Grid.Row="0" EllipsisVisibility="Collapsed" HorizontalContentAlignment="Center">
+            <AppBarButton Label="Movies"></AppBarButton>
+            <AppBarButton Label="TV Shows"></AppBarButton>
+            
+
+        </controls:PageHeader>
+        <controls1:MovieBrowser x:Name="MovieBrowser" MovieHeaders="{Binding MovieHeaders}" Grid.Row="1" />
+    </Grid>
+
+</Page>
